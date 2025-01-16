@@ -1,0 +1,274 @@
+<!-- <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Awesome Calculator App</title>
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #121212;
+            color: white;
+        }
+
+        /* Calculator Container */
+        .calculator {
+            width: 300px;
+            background-color: #333;
+            border-radius: 10px;
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+            padding: 20px;
+        }
+
+        .display {
+            background-color: #444;
+            color: white;
+            font-size: 2em;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: right;
+            overflow: hidden;
+        }
+
+        /* Button Container */
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        /* Calculator Buttons */
+        button {
+            font-size: 1.2em;
+            border: none;
+            border-radius: 8px;
+            padding: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        /* Button Colors */
+        .operation {
+            background-color: #f39c12;
+            color: white;
+        }
+
+        .operation:hover {
+            background-color: #e67e22;
+        }
+
+        .number {
+            background-color: #555;
+            color: white;
+        }
+
+        .number:hover {
+            background-color: #666;
+        }
+
+        .equals {
+            background-color: #1abc9c;
+            color: white;
+        }
+
+        .equals:hover {
+            background-color: #16a085;
+        }
+
+        .clear {
+            background-color: #e74c3c;
+            color: white;
+        }
+
+        .clear:hover {
+            background-color: #c0392b;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display" id="display">0</div>
+        <div class="buttons">
+            <button class="delete" onclick="deleteLastEntry()">C</button>
+            <button class="operation" onclick="appendOperation('/')">/</button>
+            <button class="operation" onclick="appendOperation('*')">x</button>
+            <button class="operation" onclick="appendOperation('-')">-</button>
+
+            <button class="number" onclick="appendNumber(7)">7</button>
+            <button class="number" onclick="appendNumber(8)">8</button>
+            <button class="number" onclick="appendNumber(9)">9</button>
+            <button class="operation" onclick="appendOperation('+')">+</button>
+
+            <button class="number" onclick="appendNumber(4)">4</button>
+            <button class="number" onclick="appendNumber(5)">5</button>
+            <button class="number" onclick="appendNumber(6)">6</button>
+            <button class="operation" onclick="appendOperation('.')">.</button>
+
+            <button class="number" onclick="appendNumber(1)">1</button>
+            <button class="number" onclick="appendNumber(2)">2</button>
+            <button class="number" onclick="appendNumber(3)">3</button>
+            <button class="clear" onclick="clearDisplay()">CC</button>
+            <button class="number" onclick="appendNumber(0)" style="grid-column: span 2;">0</button>
+            <button class="equals" onclick="calculateResult()" style="grid-column: span 2;">=</button>
+        </div>
+    </div>
+
+    <script>
+        let displayValue = "0";
+
+        function updateDisplay() {
+            document.getElementById("display").innerText = displayValue;
+        }
+
+        function appendNumber(number) {
+            if (displayValue === "0") {
+                displayValue = number.toString();
+            } else {
+                displayValue += number.toString();
+            }
+            updateDisplay();
+        }
+
+        function appendOperation(operation) {
+            if (!isNaN(displayValue.slice(-1))) {
+                displayValue += " " + operation + " ";
+                updateDisplay();
+            }
+        }
+
+        function clearDisplay() {
+            displayValue = "0";
+            updateDisplay();
+        }
+
+        function deleteLastEntry() {
+
+            displayValue = displayValue.trim();
+
+            if (displayValue.length === 1 || displayValue === "0") {
+                displayValue = "0";
+            } else {
+
+                displayValue = displayValue.slice(0, -1);
+
+                if (displayValue.endsWith(" ")) {
+                    displayValue = displayValue.slice(0, -3);
+                }
+            }
+            updateDisplay();
+        }
+
+        function calculateResult() {
+            try {
+                displayValue = eval(displayValue.replace(/x/g, '*').replace(/\//g, '/')).toString();
+            } catch (error) {
+                displayValue = "Error";
+            }
+            updateDisplay();
+        }
+    </script>
+</body>
+</html> -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculator</title>
+    <style>
+        body { font-family: Arial, sans-serif; }
+        .container { max-width: 400px; margin: auto; }
+        .button { padding: 10px; margin: 5px; width: 60px; font-size: 20px; }
+        .result { margin-top: 20px; font-size: 24px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Simple Calculator</h1>
+        <input type="text" id="num1" placeholder="Number 1" disabled>
+        <input type="text" id="num2" placeholder="Number 2" disabled>
+        
+        <div>
+            <button class="button" onclick="setNum(1)">1</button>
+            <button class="button" onclick="setNum(2)">2</button>
+            <button class="button" onclick="setNum(3)">3</button>
+            <button class="button" onclick="setOperation('add')">+</button>
+        </div>
+        <div>
+            <button class="button" onclick="setNum(4)">4</button>
+            <button class="button" onclick="setNum(5)">5</button>
+            <button class="button" onclick="setNum(6)">6</button>
+            <button class="button" onclick="setOperation('subtract')">-</button>
+        </div>
+        <div>
+            <button class="button" onclick="setNum(7)">7</button>
+            <button class="button" onclick="setNum(8)">8</button>
+            <button class="button" onclick="setNum(9)">9</button>
+            <button class="button" onclick="setOperation('multiply')">*</button>
+        </div>
+        <div>
+            <button class="button" onclick="clearInputs()">C</button>
+            <button class="button" onclick="setNum(0)">0</button>
+            <button class="button" onclick="calculate()">=</button>
+            <button class="button" onclick="setOperation('divide')">/</button>
+        </div>
+        
+        <div class="result" id="result"></div>
+    </div>
+
+    <script>
+        let operation = '';
+        let num1 = '';
+        let num2 = '';
+
+        function setNum(num) {
+            if (!operation) {
+                num1 += num;
+                document.getElementById('num1').value = num1;
+            } else {
+                num2 += num;
+                document.getElementById('num2').value = num2;
+            }
+        }
+
+        function setOperation(op) {
+            if (num1) {
+                operation = op;
+            }
+        }
+
+        function clearInputs() {
+            num1 = '';
+            num2 = '';
+            operation = '';
+            document.getElementById('num1').value = '';
+            document.getElementById('num2').value = '';
+            document.getElementById('result').innerText = '';
+        }
+
+        async function calculate() {
+            if (!num1 || !num2 || !operation) {
+                alert('Please enter both numbers and select an operation.');
+                return;
+            }
+
+            const response = await fetch(`/calculate?operation=${operation}&num1=${num1}&num2=${num2}`);
+            const data = await response.json();
+            document.getElementById('result').innerText = `Result: ${data.result}`;
+        }
+    </script>
+</body>
+</html>
